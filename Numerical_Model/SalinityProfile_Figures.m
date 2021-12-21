@@ -3,7 +3,7 @@ clear all;
 
 D=170; %Diffusivity
 Sc=100; %Salinity concentration at tree death. (Cintron et al 1978) (ppt)
-ETnet = 0.74;
+ETnet = 1.74;
 %ETnet = 1; %Enet in m/yr
 % ETnet=linspace(1,100,100); %E-P over time (cm/yr)
 R=150; %radius of island (meters)
@@ -17,7 +17,7 @@ n=length(x); %initializing vector
 %% initializing salinity vector
 
 S=zeros(1,n); %creating space to store values in vector
-S0=35; %ocean salinity is 35 ppt on average
+S0=40; %ocean salinity is 35 ppt on average
 S(1)=S0; %first value equals 35 ppt (ocean salinity)
 S(end)=S0; %last value equals 35 ppt (ocean salinity)
 %end et net loop
@@ -29,7 +29,7 @@ end
 % %X = linspace(-60,60,104);
 %  figure(1)
 %  hold on
-%  plot(x,S,'linewidth',5);
+  plot(x,S,'linewidth',5);
 % title('Low Altitude Low Tide');
 % legend('Precipitation = 500 mm','Precipitation = 4,000 mm');
 % %legend('Steady State')
