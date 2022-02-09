@@ -3,6 +3,7 @@ from rasterio.enums import Resampling
 import glob
 import numpy as np
 import matplotlib.pyplot as plt
+from rasterio.transform import Affine
 
 '''
 Code Documentation:
@@ -40,32 +41,21 @@ AverageMap_TRMM_UC = (AverageMap_TRMM*24*365)/1000 #units correction
 plt.imshow(AverageMap_TRMM_UC[0,:,:])
 plt.colorbar()
 
+longitude = np.arange(-180,180,1)
+latitude = np.arange(-50,50,1)
 
-'''
+res = (longitude[-1] - longitude[0]) / len(longitude)
+transform = Affine.translation(longitude[0] - res / 2, latitude[0] - res / 2) * Affine.scale(res, res)
+
 with rio.open(
     '/Users/isamarcortes/Desktop/TRMM_GeoTIFF/CopyOfDataInCaseIMessUpcopy/AverageTRMM.tif',
     'w',
     driver='GTiff',
-    height=AverageMap_TRMM_UC.shape[0],
-    width=AverageMap_TRMM_UC.shape[1],
+    height=len(latitude),
+    width=len(longitude),
     count=1,
     dtype=AverageMap_TRMM_UC.dtype,
     crs='+proj=latlong',
+    transform=transform,
 )as dst:
     dst.write(AverageMap_TRMM_UC)
-'''
-
-
-with rio.open(j) as src:
-    raster_data = src.read()
-    raster_meta = src.profile
-    
-# make any necessary changes to raster properties, e.g.:
-raster_meta['dtype'] = "float32"
-raster_meta['nodata'] = -99
-
-with rio.open('/Users/isamarcortes/Desktop/TRMM_GeoTIFF/CopyOfDataInCaseIMessUpcopy/AverageTRMM.tif', 'w', **raster_meta) as dst:
-    dst.write(AverageMap_TRMM_UC)
-
-     
-        
