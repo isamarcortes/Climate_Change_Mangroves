@@ -25,12 +25,14 @@ for i in WHOI_data:
 
 
 AverageMap_WHOI = np.mean(Months_append,axis=0)
-test = np.flip(AverageMap_WHOI)
+AverageMap_WHOI_UC = AverageMap_WHOI/1200
+test = np.flip(AverageMap_WHOI_UC)
 test1 = np.fliplr(test)
 test2 = np.flip(test1)
 lat_1 = np.flip(latitude)
 lon, lat = np.meshgrid(longitude, lat_1)
-#plt.pcolor(lon,lat,test1)
+plt.pcolor(lon,lat,test1)
+plt.colorbar()
 
 #####################Creating the tif file
 res = (longitude[-1] - longitude[0]) / len(longitude)
@@ -40,15 +42,13 @@ with rio.open(
     '/Users/isamarcortes/Desktop/TRMM_GeoTIFF/CopyOfDataInCaseIMessUpcopy/AverageWHOI.tif',
     'w',
     driver='GTiff',
-    height=AverageMap_WHOI.shape[0],
-    width=AverageMap_WHOI.shape[1],
+    height=AverageMap_WHOI_UC.shape[0],
+    width=AverageMap_WHOI_UC.shape[1],
     count=1,
-    dtype=AverageMap_WHOI.dtype,
+    dtype=AverageMap_WHOI_UC.dtype,
     crs='+proj=latlong',
     transform=transform,
 )as dst:
-    dst.write(AverageMap_WHOI, 1)
+    dst.write(AverageMap_WHOI_UC, 1)
 
 
-
-plt.imshow(AverageMap_WHOI)
