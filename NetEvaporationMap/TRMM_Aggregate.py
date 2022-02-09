@@ -2,6 +2,7 @@ import rasterio as rio
 from rasterio.enums import Resampling
 import glob
 import numpy as np
+import matplotlib.pyplot as plt
 
 '''
 Code Documentation:
@@ -13,7 +14,7 @@ Code Documentation:
 
 
 TRMM_Files = sorted(glob.glob('/Users/isamarcortes/Desktop/TRMM_GeoTIFF/*.tif')) #change this to working directory
-downscale_factor = 1/16 #downscale to 1 degree resolution
+downscale_factor = 1/4 #downscale to 1 degree resolution
 files = [] 
 
 for j in TRMM_Files:
@@ -33,19 +34,38 @@ for i in files:
         )    
         NPArrays.append(data)
 
-AverageMap = np.mean(NPArrays,axis = 0)
+AverageMap_TRMM = np.mean(NPArrays,axis = 0)
+AverageMap_TRMM_UC = (AverageMap_TRMM*24*365)/1000 #units correction
+
+plt.imshow(AverageMap_TRMM_UC[0,:,:])
+plt.colorbar()
+
+
+'''
+with rio.open(
+    '/Users/isamarcortes/Desktop/TRMM_GeoTIFF/CopyOfDataInCaseIMessUpcopy/AverageTRMM.tif',
+    'w',
+    driver='GTiff',
+    height=AverageMap_TRMM_UC.shape[0],
+    width=AverageMap_TRMM_UC.shape[1],
+    count=1,
+    dtype=AverageMap_TRMM_UC.dtype,
+    crs='+proj=latlong',
+)as dst:
+    dst.write(AverageMap_TRMM_UC)
+'''
 
 
 with rio.open(j) as src:
     raster_data = src.read()
     raster_meta = src.profile
-
+    
 # make any necessary changes to raster properties, e.g.:
 raster_meta['dtype'] = "float32"
 raster_meta['nodata'] = -99
 
-with rio.open('/Users/isamarcortes/Desktop/TRMM_GeoTIFF/CopyOfDataInCaseIMessUp copy/AverageTRMM.tif', 'w', **raster_meta) as dst:
-    dst.write(AverageMap)
+with rio.open('/Users/isamarcortes/Desktop/TRMM_GeoTIFF/CopyOfDataInCaseIMessUpcopy/AverageTRMM.tif', 'w', **raster_meta) as dst:
+    dst.write(AverageMap_TRMM_UC)
 
      
         
