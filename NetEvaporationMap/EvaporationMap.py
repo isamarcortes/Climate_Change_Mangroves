@@ -5,12 +5,11 @@ import matplotlib.pyplot as plt
 import geopandas as gpd
 import rasterio as rio
 from rasterio.transform import Affine
+import pandas as pd
 
 
 WHOI_data = sorted(glob.glob('/Users/isamarcortes/Dropbox/Isamar/Satellite_Imagery_Analysis/WHOI_Data/Whoi_Data_1stChapter/*.nc'))
 WHOI_data_append = []
-
-
 
 
 Months_append = []
@@ -21,11 +20,11 @@ for i in WHOI_data:
     for j in np.arange(1,12):
         Months_append.append(dataset['evapr'][j,:,:])
         latitude = dataset['lat'][:]
-        longitude = dataset['lon'][:]
+        longitude = np.arange(-180,180)#dataset['lon'][:]
 
 
 AverageMap_WHOI = np.mean(Months_append,axis=0)
-AverageMap_WHOI_UC = AverageMap_WHOI/1200
+AverageMap_WHOI_UC = (AverageMap_WHOI/100) ##conversion to meters per year? (fix this)
 test = np.flip(AverageMap_WHOI_UC)
 test1 = np.fliplr(test)
 test2 = np.flip(test1)
@@ -50,5 +49,3 @@ with rio.open(
     transform=transform,
 )as dst:
     dst.write(AverageMap_WHOI_UC, 1)
-
-
