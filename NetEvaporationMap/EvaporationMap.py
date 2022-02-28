@@ -23,8 +23,9 @@ for i in WHOI_data:
         longitude = np.arange(-180,180)#dataset['lon'][:]
 
 
+
 AverageMap_WHOI = np.mean(Months_append,axis=0)
-AverageMap_WHOI_UC = (AverageMap_WHOI/100) ##conversion to meters per year? (fix this)
+AverageMap_WHOI_UC = ((AverageMap_WHOI*0.1)*12/100) ##conversion to meters per year (multiplied by scale_factor)
 test = np.flip(AverageMap_WHOI_UC)
 test1 = np.fliplr(test)
 test2 = np.flip(test1)
@@ -49,3 +50,8 @@ with rio.open(
     transform=transform,
 )as dst:
     dst.write(AverageMap_WHOI_UC, 1)
+
+
+
+
+
