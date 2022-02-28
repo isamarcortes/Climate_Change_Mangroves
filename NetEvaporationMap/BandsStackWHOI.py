@@ -22,7 +22,7 @@ for i in WHOI_data:
 
 AverageMap_WHOI_UC = []
 for k in Months_append:
-    AverageMap_WHOI_UC.append(k / 100)
+    AverageMap_WHOI_UC.append((k*0.1) / 100) ###multiplying by scale factor and converting to meters
 
 OnlyCaribbean = []
 for l in AverageMap_WHOI_UC:
