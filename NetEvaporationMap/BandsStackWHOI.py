@@ -15,7 +15,7 @@ for i in WHOI_data:
     WHOI_data_append.append(i)
     dataset = nc.Dataset(i,'r')
     
-    for j in np.arange(1,12):
+    for j in np.arange(0,12):
         Months_append.append(dataset['evapr'][j,:,:])
         latitude = dataset['lat'][:]
         longitude = np.arange(-180,180)#dataset['lon'][:]
@@ -26,13 +26,18 @@ for k in Months_append:
 
 OnlyCaribbean = []
 for l in AverageMap_WHOI_UC:
-    OnlyCaribbean.append(l[40:140,180:360])
+    #OnlyCaribbean.append(l[40:140,180:360])
+    test1 = l[40:140,180:360]
+    test3= np.flip(test1)
+    test4 = np.fliplr(test3)
+    test5 = np.flipud(test4)
+    OnlyCaribbean.append(test5)
+    
+
+plt.imshow(test5)
+plt.show()
 
 AverageMap_WHOI = np.mean(Months_append,axis=0)
-
-#####################Creating the tif file
-res = (longitude[-1] - longitude[0]) / len(longitude)
-transform = Affine.translation(longitude[0] - res / 2, latitude[0] - res / 2) * Affine.scale(res, res)
 
 ########Getting transformation from TRMM
 AverageTRMMData = '/Users/isamarcortes/Desktop/TRMM_GeoTIFF/CopyOfDataInCaseIMessUpcopy/AverageTRMM.tif'
@@ -43,12 +48,12 @@ with rio.open(AverageTRMMData) as src:
 latforraster = np.arange(0,100)
 lonforraster = np.arange(0,180)
 with rio.open(
-    '/Users/isamarcortes/Desktop/TRMM_GeoTIFF/CopyOfDataInCaseIMessUpcopy/AverageWHOI_allbands.tif',
+    '/Users/isamarcortes/Dropbox/Isamar/Satellite_Imagery_Analysis/AverageWHOI_allbands.tif',
     'w',
     driver='GTiff',
     height=len(latforraster),
     width=len(lonforraster),
-    count=198,
+    count=264,
     dtype=AverageMap_WHOI.dtype,
     crs='+proj=latlong',
     transform=Tform,
