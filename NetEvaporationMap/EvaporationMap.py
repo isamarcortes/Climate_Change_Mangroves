@@ -23,9 +23,10 @@ for i in WHOI_data:
     WHOI_data_append.append(i)
     dataset = nc.Dataset(i,'r')
     
-    for j in np.arange(1,12): ####12 months of evaporation data
+    for j in np.arange(0,12): ####12 months of evaporation data
         Months_append.append(dataset['evapr'][j,:,:])
         latitude = dataset['lat'][:]
+        time = dataset['time'][:]
         longitude = np.arange(-180,180)#dataset['lon'][:]
 
 '''
@@ -47,6 +48,8 @@ plt.pcolor(lon,lat,test1)
 plt.colorbar()
 '''
 
+
+'''
 #####################Creating the tif file
 res = (longitude[-1] - longitude[0]) / len(longitude)
 transform = Affine.translation(longitude[0] - res / 2, latitude[0] - res / 2) * Affine.scale(res, res)
@@ -65,6 +68,6 @@ with rio.open(
     dst.write(AverageMap_WHOI_UC, 1)
 
 
-
+'''
 
 

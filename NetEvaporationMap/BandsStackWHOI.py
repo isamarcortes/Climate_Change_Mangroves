@@ -17,8 +17,9 @@ for i in WHOI_data:
     
     for j in np.arange(0,12):
         Months_append.append(dataset['evapr'][j,:,:])
-        latitude = dataset['lat'][:]
-        longitude = np.arange(-180,180)#dataset['lon'][:]
+        time = dataset['time']
+        print(time)
+        
 
 AverageMap_WHOI_UC = []
 for k in Months_append:
@@ -28,7 +29,7 @@ OnlyCaribbean = []
 for l in AverageMap_WHOI_UC:
     #OnlyCaribbean.append(l[40:140,180:360])
     test1 = l[40:140,180:360]
-    test3= np.flip(test1)
+    test3= np.flip(test1) 
     test4 = np.fliplr(test3)
     test5 = np.flipud(test4)
     OnlyCaribbean.append(test5)
@@ -38,6 +39,10 @@ plt.imshow(test5)
 plt.show()
 
 AverageMap_WHOI = np.mean(Months_append,axis=0)
+plt.imshow(AverageMap_WHOI[40:140,180:360])
+plt.colorbar()
+plt.show()
+
 
 ########Getting transformation from TRMM
 AverageTRMMData = '/Users/isamarcortes/Desktop/TRMM_GeoTIFF/CopyOfDataInCaseIMessUpcopy/AverageTRMM.tif'
@@ -60,3 +65,4 @@ with rio.open(
 )as dst:
     for band_nr, src in enumerate(OnlyCaribbean, start=1):
         dst.write(src, band_nr)
+
