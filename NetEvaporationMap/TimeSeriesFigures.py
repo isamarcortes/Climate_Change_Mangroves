@@ -22,12 +22,14 @@ for i in Names:
     sns.scatterplot(data=AllEvapData,x='Time',y=i,label=i)
 plt.ylabel('Evaporation Rate (m/yr)')
 plt.legend(bbox_to_anchor=(1.02, 1),loc='upper left')
+plt.savefig('/Users/isamarcortes/Dropbox/Isamar/Conferences/CSDMS2022/Evaporation.svg',format='svg',dpi=600)
 plt.show()
 
 for j in Names:
     sns.scatterplot(data=AllPrecipData,x='Time',y=j,label=j)
 plt.ylabel('Precipitation Rate (m/yr)')
 plt.legend(bbox_to_anchor=(1.02, 1),loc='upper left')
+plt.savefig('/Users/isamarcortes/Dropbox/Isamar/Conferences/CSDMS2022/Precipitation.svg',format='svg',dpi=600)
 plt.show()
 
 
@@ -40,6 +42,7 @@ sns.scatterplot(data=CubaData,x='Year',y='ResidualET',label='ET Residual')
 plt.legend(loc='lower center')
 plt.ylabel('')
 plt.title('Cuba Evaporation and ET Residuals')
+plt.savefig('/Users/isamarcortes/Dropbox/Isamar/Conferences/CSDMS2022/Cuba.svg',format='svg',dpi=600)
 plt.show()
 
 sns.scatterplot(data=BelizeData,x='Year',y='ResidualEvap',label='Evaporation Residual')
@@ -47,6 +50,7 @@ sns.scatterplot(data=BelizeData,x='Year',y='ResidualET',label='ET Residual')
 plt.legend(loc='lower left')
 plt.ylabel('')
 plt.title('Belize Evaporation and ET Residuals')
+plt.savefig('/Users/isamarcortes/Dropbox/Isamar/Conferences/CSDMS2022/Belize.svg',format='svg',dpi=600)
 plt.show()
 
 
