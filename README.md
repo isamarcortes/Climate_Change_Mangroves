@@ -6,7 +6,7 @@ In this repository, you will find the necessary codes and files to reproduce the
 * Island_KML - This folder contains the kml files built in Google Earth Pro to extract the vegetated area of each island within the database.
 * Numerical_Model - This folder houses the numerical modeling code.
 * Net Evaporation Map - This folder houses the codes to create the net evaporation map
-
+* Red_Black_Mangrove_Separation - This folder houses the code (Classification.py) and the associated data files for the classification of red and black mangrove area.
 
 ## Below are images of the islands used within this analysis. 
 
