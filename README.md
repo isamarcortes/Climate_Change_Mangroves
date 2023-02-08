@@ -2,7 +2,7 @@
 
 In this repository, you will find the necessary codes and files to reproduce the analysis done in this manuscript. The folders within this repository are as follows:
 
-* Climate Projections - This folder houses the code used to analyze and visualize NASA GISS climate data.
+* Climate Projections - This folder houses the code used to analyze and visualize different climate models from the World Bank Climate Change Knowledge Portal.
 * Island_KML - This folder contains the kml files built in Google Earth Pro to extract the vegetated area of each island within the database.
 * Numerical_Model - This folder houses the numerical modeling code.
 * Net Evaporation Map - This folder houses the codes to create the net evaporation map
