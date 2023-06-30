@@ -7,7 +7,7 @@ In this repository, you will find the necessary codes and files to reproduce the
 * Numerical_Model - This folder houses the numerical modeling code.
 * Net Evaporation Map - This folder houses the codes to create the net evaporation map
 * Red_Black_Mangrove_Separation - This folder houses the code (Classification.py) and the associated data files for the classification of red and black mangrove area.
-
+* SPEI_Visualization - This folder houses code to create figure S5.
 ## Below are images of the islands used within this analysis. 
 
 ### Bahamas
