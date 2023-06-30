@@ -1,27 +1,40 @@
 %% input parameters for PDE
-D=5; %Diffusivity m^2/yr
-Da=50;
-Db=90;
-Dc=130; %Different diffusion values
+D=17.41; %Diffusivity m^2/yr
+Da=500;
+Db=1000;
+Dc=2811.13; %Different diffusion values
 Sc=82; %Salinity concentration at tree death. (Cintron et al 1978) (ppt)
-So=35;% (ppt ocean salinity average)
-Sos=45; %Second Ocean salinity value
+So=27;% (ppt ocean salinity average)
+Sos=60; %Second Ocean salinity value
 ETnet=linspace(0.01,2,1001); %m/yr
-b=1 %conversion factor
+b=1; %conversion factor
 
+
+Av=((Sc-So)*2*pi*D)./(ETnet);
+Ava=((Sc-Sos)*2*pi*D)./(ETnet);
+
+Avb=((Sc-So)*2*pi*Da)./(ETnet);
+Avc=((Sc-Sos)*2*pi*Da)./(ETnet);
+
+Avd=((Sc-So)*2*pi*Db)./(ETnet);
+Ave=((Sc-Sos)*2*pi*Db)./(ETnet);
+
+Avf=((Sc-So)*2*pi*Dc)./(ETnet);
+Avg=((Sc-Sos)*2*pi*Dc)./(ETnet);
 
 % for i=1:n
-Av=((Sc-So)*2*pi*D)./(ETnet)*(35*b);
-Ava=((Sc-Sos)*2*pi*D)./(ETnet)*(35*b);
 
-Avb=((Sc-So)*2*pi*Da)./(ETnet)*(35*b);
-Avc=((Sc-Sos)*2*pi*Da)./(ETnet)*(35*b);
+%Av=((Sc-So)*2*pi*D)./(ETnet)*(35*b);
+%Ava=((Sc-Sos)*2*pi*D)./(ETnet)*(35*b);
 
-Avd=((Sc-So)*2*pi*Db)./(ETnet)*(35*b);
-Ave=((Sc-Sos)*2*pi*Db)./(ETnet)*(35*b);
+%Avb=((Sc-So)*2*pi*Da)./(ETnet)*(35*b);
+%Avc=((Sc-Sos)*2*pi*Da)./(ETnet)*(35*b);
 
-Avf=((Sc-So)*2*pi*Dc)./(ETnet)*(35*b);
-Avg=((Sc-Sos)*2*pi*Dc)./(ETnet)*(35*b);
+%Avd=((Sc-So)*2*pi*Db)./(ETnet)*(35*b);
+%Ave=((Sc-Sos)*2*pi*Db)./(ETnet)*(35*b);
+
+%Avf=((Sc-So)*2*pi*Dc)./(ETnet)*(35*b);
+%Avg=((Sc-Sos)*2*pi*Dc)./(ETnet)*(35*b);
 % end
 %px= [0.8451 0.8457 .6405 .6405 .8559 .8559 .1426 .5072 .7242 .7242 .7242 .7242 .7242 .7242 1.0443 1.4904 1.4904 .7234 .6225 1.4067 1.4067 .7242 .7242 1.0654 .5543 .5543 1.4067 1.0078 1.0078];
 %py= [8487 7174 17014 23700 67701 85012 2979571 1197621 296857 29122 241064 112319 77645 35737 579468 161227 366635 1293025 42603 136350 544291 252404 75396 120650 106110 74044 737302 195762 62553];
@@ -41,10 +54,13 @@ plot(ETnet,Av*10^-6,'b',ETnet,Ava*10^-6,'b--',ETnet,Avb*10^-6,'g',ETnet,Avc*10^-
 figure(1)
 hold on
 
-xlabel('Net Evaporation (m yr^-^1)','FontSize',14)
- ylabel('Av (km^2)','FontSize',14)
- title('Vegetated Area')
-h= legend('Dc=10 m/yr So=35 ppt','Dc=10 m/yr So=40 ppt','Dc=50 m/yr So=35 ppt','Dc=50 m/yr So=40 ppt','Dc=90 m/yr So=35 ppt','Dc=90 m/yr So=40 ppt','Dc=130 m/yr So=35 ppt','Dc=130 m/yr So=40 ppt')
+xlabel('{\itE_n_e_t} (m yr^-^1)','FontSize',15)
+ ylabel('{\itA_v} (km^2)','FontSize',15)
+ title('{\itA_v} vs {\itE_n_e_t}','FontSize',16)
+ 
+ax = gca;
+ax.FontSize = 14;
+h= legend('{\itD_c}=17.41 m^2/yr  {\itS_o}=27 ppt','{\itD_c}=17.41 m^2/yr  {\itS_o}=60 ppt','{\itD_c}=500 m^2/yr  {\itS_o}=27 ppt','{\itD_c}=500 m^2/yr  {\itS_o}=60 ppt','{\itD_c}=1000 m^2/yr  {\itS_o}=27 ppt','{\itD_c}=1000 m^2/yr  {\itS_o}=60 ppt','{\itD_c}=2811.13 m^2/yr  {\itS_o}=27 ppt','{\itD_c}=2811.13 m^2/yr  {\itS_o}=60 ppt');
 set(h,'FontSize',13)
 legend boxoff
  axis([0 1.8 0 3])
