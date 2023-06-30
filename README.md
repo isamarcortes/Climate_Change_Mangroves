@@ -1,4 +1,4 @@
-# Exploring the Role of Evaporation and Precipitation on Mangrove Island Morphology
+# Quantifying the role of net evaporation rates on mangrove loss: Insights from mangrove islands across the Caribbean
 
 In this repository, you will find the necessary codes and files to reproduce the analysis done in this manuscript. The folders within this repository are as follows:
 
