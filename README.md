@@ -1,5 +1,7 @@
 # Quantifying the role of net evaporation rates on mangrove loss: Insights from mangrove islands across the Caribbean
 
+[![DOI](https://zenodo.org/badge/379367111.svg)](https://zenodo.org/doi/10.5281/zenodo.11669887)
+
 In this repository, you will find the necessary codes and files to reproduce the analysis done in this manuscript. The folders within this repository are as follows:
 
 * Climate Projections - This folder houses the code used to analyze and visualize different climate models from the World Bank Climate Change Knowledge Portal.
